@@ -1,0 +1,10 @@
+.navbarLi {
+  @apply -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7;
+}
+
+.navbarLi:hover {
+  color: rgb(255, 0, 106);
+  text-shadow: 0 0 17px rgb(255, 0, 106);
+  animation: neon 5s infinite;
+  font-weight: 800;
+}

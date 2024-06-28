@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+/* Ajustes para pantallas medianas */
+@media (min-width: 640px) {
+  .landingBackground {
+    height: 80vh; /* 80% of the viewport height */
+  }
+}
+
+/* Ajustes para pantallas grandes */
+@media (min-width: 1024px) {
+  .landingBackground {
+    height: 60vh; /* 60% of the viewport height */
+  }
+}
+
+/* Ajustes para pantallas extra grandes */
+@media (min-width: 1280px) {
+  .landingBackground {
+    height: 50vh; /* 50% of the viewport height */
+  }
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: rgb(var(--background-end-rgb));
+  color: rgb(var(--foreground-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+.button {
+  @apply bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg;
+  width: 130px;
+}
+.button-black {
+  width: 105px;
+  height: 35px;
+  background-color: rgba(32, 32, 32, 0.719);
+  color: rgb(255, 0, 85);
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.img-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  filter: saturate(1) brightness(0.4);
+}
+
+.img-background-store {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  filter: saturate(1) brightness(0.4);
+}
+
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  filter: saturate(1) brightness(0.4);
+}

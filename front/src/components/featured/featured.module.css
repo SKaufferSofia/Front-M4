@@ -1,0 +1,21 @@
+.featured {
+  width: 650px;
+  height: 400px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
+  margin: 25px;
+}
+
+.featuredImage {
+  width: auto;
+  height: 200px;
+}
+
+.featured:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 50px rgb(255, 0, 106);
+  animation: neon 5s infinite;
+}
