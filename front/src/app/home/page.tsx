@@ -7,7 +7,7 @@ import axios from "axios";
 const API_PUBLIC = process.env.NEXT_PUBLIC_API_LOCAL;
 
 const fetchProducts = async () => {
-  const response = await axios.get(`${API_PUBLIC}/products`);
+  const response = await axios.get(`https://front-m4.onrender.com/products`);
   const data = response.data;
 
   return data;
