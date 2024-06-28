@@ -35,7 +35,7 @@ const RegisterForm = () => {
   const PetitionRegister = async (): Promise<boolean> => {
     try {
       const response = await axios.post(
-        `${API_LOCAL}/users/register/`,
+        `https://front-m4.onrender.com/users/register/`,
         regiterData
       );
       console.log(response.data);

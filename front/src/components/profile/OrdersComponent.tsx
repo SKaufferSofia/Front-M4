@@ -12,12 +12,15 @@ const OrdersComponent = () => {
 
   const getOrders = async () => {
     try {
-      const response = await axios.get(`${API_PUBLIC}/users/orders`, {
-        headers: {
-          Authorization: `${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.get(
+        `https://front-m4.onrender.com/users/orders`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       setOrders(response.data);
     } catch (error) {

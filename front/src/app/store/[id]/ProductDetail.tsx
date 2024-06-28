@@ -6,7 +6,9 @@ import "dotenv/config";
 const API_PUBLIC = process.env.NEXT_PUBLIC_API_LOCAL;
 
 const ProductDetailFetch = async (id: number) => {
-  const response = await axios.get(`${API_PUBLIC}/products/${id}`);
+  const response = await axios.get(
+    `https://front-m4.onrender.com/products/${id}`
+  );
   const data = response.data;
   return data;
 };

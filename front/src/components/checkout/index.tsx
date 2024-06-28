@@ -16,7 +16,7 @@ const CheckoutComponent = () => {
     try {
       const products = cart.map((product: IProduct) => product.id);
       const response = await axios.post(
-        `${API_PUBLIC}/orders`,
+        `https://front-m4.onrender.com/orders`,
         { products },
         {
           headers: {
