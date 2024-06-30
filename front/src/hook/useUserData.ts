@@ -1,15 +1,16 @@
-import { OrderTypes } from "@/components/profile/types";
+import { IOrders, IUser } from "@/interfaces/types";
 import { useState, useEffect } from "react";
 
 const useUserData = () => {
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<IUser>({
     name: "",
     email: "",
     address: "",
     phone: "",
+    role: "user",
     orders: [],
   });
-  const [orders, setOrders] = useState<OrderTypes[]>([]);
+  const [orders, setOrders] = useState<IOrders[]>([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {

@@ -5,10 +5,10 @@ import {
   CardFooter,
   Typography,
 } from "@material-tailwind/react";
-import IProduct from "../products/types";
 import styles from "./featured.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { IProduct } from "@/interfaces/types";
 
 export const CardFeatured: React.FC<IProduct> = ({ id, name, image }) => {
   return (

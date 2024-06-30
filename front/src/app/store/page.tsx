@@ -1,18 +1,9 @@
 import CardProducts from "@/components/products/CardProducts";
-import axios from "axios";
 import Footer from "@/components/footer/Footer";
 import { FaHome } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
-
-const API_PUBLIC = process.env.NEXT_PUBLIC_API_LOCAL;
-
-const fetchProducts = async () => {
-  const response = await axios.get(`https://front-m4.onrender.com/products`);
-  const data = response.data;
-
-  return data;
-};
+import { fetchProducts } from "@/lib/server/petition";
 
 const Store = async () => {
   const products = await fetchProducts();

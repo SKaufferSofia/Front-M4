@@ -1,5 +1,5 @@
+import { IProduct } from "@/interfaces/types";
 import { useState, useEffect } from "react";
-import IProduct from "@/components/products/types";
 
 const useCart = () => {
   const getInitialCart = (): IProduct[] => {

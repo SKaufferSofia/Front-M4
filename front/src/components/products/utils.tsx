@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import IProduct from "./types";
+import React from "react";
 import {
   Card,
   CardHeader,
@@ -9,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import Link from "next/link";
 import Image from "next/image";
+import { IProduct } from "@/interfaces/types";
 
 export const ProductsList: React.FC<IProduct> = ({
   id,

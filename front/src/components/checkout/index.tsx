@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import IProduct from "../products/types";
 import useCart from "@/hook/useCart";
 import useToken from "@/hook/useToken";
 import Image from "next/image";
 import axios from "axios";
+import { IProduct } from "@/interfaces/types";
 
 const API_PUBLIC = process.env.NEXT_PUBLIC_API_LOCAL;
 
@@ -16,7 +16,7 @@ const CheckoutComponent = () => {
     try {
       const products = cart.map((product: IProduct) => product.id);
       const response = await axios.post(
-        `https://front-m4.onrender.com/orders`,
+        `${API_PUBLIC}/orders`,
         { products },
         {
           headers: {

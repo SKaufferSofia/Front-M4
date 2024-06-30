@@ -5,7 +5,7 @@ import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import "../../../app/store/page";
 import React from "react";
 import { validate } from "./helpers/validate";
-import { IRegisterFormErrors } from "./types";
+import { IRegisterForm, IRegisterFormErrors } from "@/interfaces/types";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import styles from "../form.module.css";
@@ -15,7 +15,7 @@ const API_LOCAL = process.env.NEXT_PUBLIC_API_LOCAL;
 
 const RegisterForm = () => {
   const router = useRouter();
-  const [regiterData, setRegiterData] = React.useState({
+  const [regiterData, setRegiterData] = React.useState<IRegisterForm>({
     name: "",
     phone: Number(),
     address: "",
@@ -35,7 +35,7 @@ const RegisterForm = () => {
   const PetitionRegister = async (): Promise<boolean> => {
     try {
       const response = await axios.post(
-        `https://front-m4.onrender.com/users/register/`,
+        `${API_LOCAL}/users/register/`,
         regiterData
       );
       console.log(response.data);

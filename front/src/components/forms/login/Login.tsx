@@ -3,18 +3,18 @@
 import React from "react";
 import styles from "../form.module.css";
 import { Card, Input, Typography } from "@material-tailwind/react";
-import { ILoginFormErrors } from "./types";
 import { validate } from "./helpers/validate";
 import { json } from "stream/consumers";
 import useToken from "@/hook/useToken";
 import axios from "axios";
 import useUserData from "@/hook/useUserData";
 import Link from "next/link";
+import { ILoginForm, ILoginFormErrors } from "@/interfaces/types";
 
 const API_PUBLIC = process.env.NEXT_PUBLIC_API_LOCAL;
 
 const LoginForm = () => {
-  const [loginData, setLoginData] = React.useState({
+  const [loginData, setLoginData] = React.useState<ILoginForm>({
     email: "",
     password: "",
   });
@@ -25,10 +25,7 @@ const LoginForm = () => {
 
   const PetitionLogin = async () => {
     try {
-      const response = await axios.post(
-        `https://front-m4.onrender.com/users/login`,
-        loginData
-      );
+      const response = await axios.post(`${API_PUBLIC}/users/login`, loginData);
       setToken(response.data.token); //viene de respuesta del json como una
       localStorage.setItem("userToken", response.data.token); //seteo el token del local storage como el nuevo token que viene del json
 

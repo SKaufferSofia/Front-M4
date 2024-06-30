@@ -2,16 +2,7 @@ import { CarouselDefault } from "@/components/carousel";
 import FeaturedComponent from "@/components/featured/Featured";
 import Footer from "@/components/footer/Footer";
 import { ProductFeatured } from "@/components/featured/FeaturedProducts";
-import axios from "axios";
-
-const API_PUBLIC = process.env.NEXT_PUBLIC_API_LOCAL;
-
-const fetchProducts = async () => {
-  const response = await axios.get(`https://front-m4.onrender.com/products`);
-  const data = response.data;
-
-  return data;
-};
+import { fetchProducts } from "@/lib/server/petition";
 
 const Home = async () => {
   const products = await fetchProducts();

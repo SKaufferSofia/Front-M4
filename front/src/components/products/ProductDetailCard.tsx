@@ -1,11 +1,11 @@
 "use client";
 
-import IProduct from "./types";
 import { IconButton, Typography } from "@material-tailwind/react";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import useCart from "@/hook/useCart";
 import useToken from "@/hook/useToken";
 import Image from "next/image";
+import { IProduct } from "@/interfaces/types";
 
 const ProductDetailCard = ({
   id,

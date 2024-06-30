@@ -1,4 +1,4 @@
-import { ILoginForm, ILoginFormErrors } from "../types";
+import { ILoginForm, ILoginFormErrors } from "@/interfaces/types";
 
 export const validate = (data: ILoginForm): ILoginFormErrors => {
   const errors: ILoginFormErrors = {};

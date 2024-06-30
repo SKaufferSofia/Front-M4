@@ -1,6 +1,6 @@
 "use client";
 
-import IProduct from "../products/types";
+import { IProduct } from "@/interfaces/types";
 import { CardFeatured } from "./utils";
 
 const FeaturedComponent = ({ products }: { products: IProduct[] }) => {

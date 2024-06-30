@@ -1,17 +1,6 @@
 import Footer from "@/components/footer/Footer";
 import ProductDetailCard from "@/components/products/ProductDetailCard";
-import axios from "axios";
-import "dotenv/config";
-
-const API_PUBLIC = process.env.NEXT_PUBLIC_API_LOCAL;
-
-const ProductDetailFetch = async (id: number) => {
-  const response = await axios.get(
-    `https://front-m4.onrender.com/products/${id}`
-  );
-  const data = response.data;
-  return data;
-};
+import { ProductDetailFetch } from "@/lib/server/petition";
 
 export const ProductDetail = async ({ params }: { params: { id: string } }) => {
   const { id, name, description, price, stock, image } =
