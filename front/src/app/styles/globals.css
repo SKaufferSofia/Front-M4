@@ -47,6 +47,7 @@ body {
     text-wrap: balance;
   }
 }
+
 .button {
   @apply bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg;
   width: 130px;
@@ -54,7 +55,7 @@ body {
 .button-black {
   width: 105px;
   height: 35px;
-  background-color: rgba(32, 32, 32, 0.719);
+  background-color: rgba(0, 0, 0, 0.671);
   color: rgb(255, 0, 85);
   font-size: 16px;
   font-weight: 600;
@@ -80,6 +81,12 @@ body {
   filter: saturate(1) brightness(0.4);
 }
 
+.img-background-profile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 .video-background {
   position: fixed;
   top: 0;

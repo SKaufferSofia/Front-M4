@@ -13,7 +13,7 @@ import { IProduct } from "@/interfaces/types";
 export const CardFeatured: React.FC<IProduct> = ({ id, name, image }) => {
   return (
     <div className="flex flex-row justify-center">
-      <div className={styles.featured}>
+      <div className={`${styles.featured}`}>
         <div className="flex flex-col items-center">
           <h1 className="text-2xl text-black font-semibold m-6">
             {name.toUpperCase()}
@@ -25,7 +25,7 @@ export const CardFeatured: React.FC<IProduct> = ({ id, name, image }) => {
         <Image
           src={image}
           alt={name}
-          className={styles.featuredImage}
+          className="w-40 sm:w-56 xl:w-60"
           width={1000}
           height={1000}
         />
@@ -41,21 +41,21 @@ export const CardProductFeatured: React.FC<IProduct> = ({
   image,
 }) => {
   return (
-    <Card className="mt-6 w-96 bg-white/10 flex flex-col justify-between">
+    <Card className="mt-6 w-72 bg-white/10 flex flex-col justify-between">
       <CardHeader color="blue-gray" className="relative h-56 mt-3">
         <Image
           src={image}
           alt="card-image"
-          className="h-full w-full object-contain object-center lg:h-full lg:w-full bg-white"
+          className="h-full w-full object-contain object-center lg:h-full lg:w-full bg-white p-4"
           width={500}
           height={500}
         />
       </CardHeader>
       <CardBody>
-        <Typography variant="h5" color="white" className="mb-2">
+        <Typography variant="h5" color="white" className="mb-2 poppins-medium">
           {name}
         </Typography>
-        <Typography variant="h4" color="pink" className="mb-2">
+        <Typography variant="h4" color="pink" className="mb-2 poppins-bold">
           ${price}
         </Typography>
       </CardBody>

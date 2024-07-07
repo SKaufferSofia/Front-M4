@@ -1,24 +1,29 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
-import { FaShoppingBag, FaUser, FaUserPlus } from "react-icons/fa";
-import useToken from "@/hook/useToken";
+import {
+  FaShoppingBag,
+  FaUser,
+  FaUserPlus,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
 import useUserData from "@/hook/useUserData";
-import useCart from "@/hook/useCart";
 import Image from "next/image";
+import ProfileMenu from "./ProfileMenu";
 
 const NavbarComponent: React.FC = () => {
-  const { token, setToken } = useToken();
-  const { logout } = useUserData();
-  const { clearCart } = useCart();
+  const { isLoggedIn } = useUserData();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleLogout = () => {
-    logout();
-    setToken(null);
-    clearCart();
-    window.location.href = "/";
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleOnChange = () => {
+    setMenuOpen(false);
   };
 
   return (
@@ -28,38 +33,48 @@ const NavbarComponent: React.FC = () => {
           <Image src="/logo.png" alt="" width={90} height={90} />
         </Link>
       </div>
-      <div>
-        <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+      <div className="lg:hidden">
+        <button onClick={toggleMenu} className={styles.navbarLi}>
+          {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        </button>
+      </div>
+      <div
+        className={`lg:flex ${
+          menuOpen ? "block" : "hidden"
+        } absolute lg:relative top-full left-0 w-full lg:w-auto bg-black text-center lg:bg-transparent`}
+      >
+        <ul className="my-2 flex flex-col lg:flex-row gap-2 lg:mb-0 lg:mt-0 lg:items-center lg:gap-6">
           <Link href="/home">
-            <li className={styles.navbarLi}>HOME</li>
+            <li className={styles.navbarLi} onClick={handleOnChange}>
+              HOME
+            </li>
           </Link>
           <Link href="/store">
-            <li className={styles.navbarLi}>STORE</li>
+            <li className={styles.navbarLi} onClick={handleOnChange}>
+              STORE
+            </li>
           </Link>
           <Link href="/about">
-            <li className={styles.navbarLi}>ABOUT</li>
+            <li className={styles.navbarLi} onClick={handleOnChange}>
+              ABOUT
+            </li>
           </Link>
           <Link href="/contact">
-            <li className={styles.navbarLi}>CONTACT</li>
+            <li className={styles.navbarLi} onClick={handleOnChange}>
+              CONTACT
+            </li>
           </Link>
         </ul>
       </div>
       <div className="flex gap-4">
-        {token ? (
+        {isLoggedIn ? (
           <div className="flex gap-4">
-            <Link href="/profile/dashboard">
-              <button className={styles.navbarLi}>
-                <FaUser size={20} />
-              </button>
-            </Link>
-            <Link href="/cart">
+            <Link href="/cart" onClick={handleOnChange}>
               <button className={styles.navbarLi}>
                 <FaShoppingBag size={20} />
               </button>
             </Link>
-            <button className="button" onClick={handleLogout} type="button">
-              LOG OUT
-            </button>
+            <ProfileMenu />
           </div>
         ) : (
           <div className="flex gap-4 items-center">

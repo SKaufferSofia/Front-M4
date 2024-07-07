@@ -1,4 +1,3 @@
-import Footer from "@/components/footer/Footer";
 import RegisterForm from "@/components/forms/register/Register";
 
 const Register = () => {
@@ -10,9 +9,6 @@ const Register = () => {
           Your browser does not support the video tag.
         </video>
         <RegisterForm />
-      </div>
-      <div style={{ marginTop: "100px" }}>
-        <Footer />
       </div>
     </div>
   );

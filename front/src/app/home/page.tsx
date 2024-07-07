@@ -1,21 +1,25 @@
 import { CarouselDefault } from "@/components/carousel";
 import FeaturedComponent from "@/components/featured/Featured";
-import Footer from "@/components/footer/Footer";
 import { ProductFeatured } from "@/components/featured/FeaturedProducts";
-import { fetchProducts } from "@/lib/server/petition";
+import { getProducts } from "@/lib/server/petition";
+import Image from "next/image";
 
 const Home = async () => {
-  const products = await fetchProducts();
+  const products = await getProducts();
   return (
-    <div className="absolute inset-0 z-0">
+    <div>
+      <Image
+        src="/background-home.avif"
+        alt=""
+        width={2000}
+        height={1000}
+        className="img-background"
+      />
       <CarouselDefault />
-      <div style={{ marginTop: "60px" }}>
-        <FeaturedComponent products={products} />
-      </div>
-      <div style={{ marginTop: "100px" }}>
-        <ProductFeatured products={products} />
-      </div>
-      <Footer />
+
+      <FeaturedComponent products={products} />
+
+      <ProductFeatured products={products} />
     </div>
   );
 };

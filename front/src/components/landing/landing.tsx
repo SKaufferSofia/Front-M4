@@ -9,8 +9,8 @@ const LandingComponent = () => {
         <source src="/landing-background.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      <div className="content-container mx-auto max-w-2xl py-10 sm:py-10 text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-200 sm:text-6xl poppins-bold">
+      <div className="content-container mx-auto max-w-2xl py-10 sm:py-20 text-center">
+        <h1 className="text-4xl font-bold tracking-tight text-gray-200 sm:text-6xl">
           Elevate Your Tech Experience
         </h1>
         <p className="mt-6 text-lg leading-8 text-gray-300">

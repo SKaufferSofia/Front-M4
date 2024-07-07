@@ -1,9 +1,9 @@
 "use client";
-import CheckoutComponent from "@/components/checkout";
 import LoginForm from "@/components/forms/login/Login";
+import OrdersComponent from "@/components/profile/OrdersComponent";
 import useUserData from "@/hook/useUserData";
 
-const Checkout = () => {
+const MyOrders = () => {
   const { isLoggedIn } = useUserData();
   return (
     <div>
@@ -21,12 +21,12 @@ const Checkout = () => {
           <LoginForm />
         </div>
       ) : (
-        <div className="flex items-center justify-center flex-col">
-          <CheckoutComponent />
+        <div className="flex items-center flex-col h-[100%]">
+          <OrdersComponent />
         </div>
       )}
     </div>
   );
 };
 
-export default Checkout;
+export default MyOrders;

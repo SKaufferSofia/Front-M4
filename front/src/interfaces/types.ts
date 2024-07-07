@@ -1,4 +1,3 @@
-//interface de usuarios
 export interface IUser {
   id?: number;
   name: string;
@@ -10,13 +9,11 @@ export interface IUser {
   orders: IOrders[];
 }
 
-// interface de credenciales
 export interface ICredential {
   id?: number;
   password: string;
 }
 
-// interface de productos
 export interface IProduct {
   id?: number;
   name: string;
@@ -27,33 +24,33 @@ export interface IProduct {
   categoryId?: number;
 }
 
-// interface de login
+export interface CheckoutCardProps {
+  product: IProduct;
+  removeById: (id: number) => void;
+}
+
 export interface ILoginForm {
   email: string;
   password: string;
 }
 
-// interface de errorres de login
-
 export interface ILoginFormErrors {
   [key: string]: string;
 }
 
-// interface de registro
 export interface IRegisterForm {
   name: string;
   email: string;
-  password: string;
   address: string;
   phone: number;
+  password: string;
+  confirmPassword: string;
 }
 
-// interface de errorres de registro
 export interface IRegisterFormErrors {
   [key: string]: string;
 }
 
-// interface de ordenes
 export interface IOrders {
   date: string;
   id: number;

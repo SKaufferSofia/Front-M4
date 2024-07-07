@@ -1,21 +1,9 @@
-import { IProduct } from "@/interfaces/types";
+import { IOrders, IProduct } from "@/interfaces/types";
 import { useState, useEffect } from "react";
 
 const useCart = () => {
-  const getInitialCart = (): IProduct[] => {
-    if (typeof window !== "undefined") {
-      const storedCart = localStorage.getItem("cart");
-      return storedCart ? JSON.parse(storedCart) : [];
-    }
-    return [];
-  };
-
-  const [cart, setCart] = useState<IProduct[]>(getInitialCart);
-  const [clientCart, setClientCart] = useState<IProduct[]>([]);
-
-  useEffect(() => {
-    setClientCart(cart);
-  }, [cart]);
+  const [cart, setCart] = useState<IProduct[]>([]);
+  const [orders, setOrders] = useState<IOrders[]>([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -26,22 +14,31 @@ const useCart = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-  }, [cart]);
+  const addToCard = (product: IProduct) => {
+    setCart((prevCart) => {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("cart", JSON.stringify([...prevCart, product]));
+      }
+      return [...prevCart, product];
+    });
+  };
 
   const clearCart = () => {
     if (typeof window !== "undefined") {
       localStorage.removeItem("cart");
     }
-    setCart([]);
   };
 
-  console.log("Cart:", cart);
+  const removeById = (id: number) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((item) => item.id !== id);
+      typeof window !== "undefined" &&
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  };
 
-  return { cart, setCart, clearCart, clientCart, setClientCart };
+  return { cart, setCart, orders, setOrders, addToCard, clearCart, removeById };
 };
 
 export default useCart;

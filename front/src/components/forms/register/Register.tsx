@@ -1,17 +1,18 @@
 "use client";
 
-import { Card, Input, Button, Typography } from "@material-tailwind/react";
+import { Card, Input, Typography } from "@material-tailwind/react";
 
 import "../../../app/store/page";
+import { NEXT_PUBLIC_API_URL } from "@/lib/server/envs";
 import React from "react";
-import { validate } from "./helpers/validate";
+import { validateRegister } from "../../../helpers/validate";
 import { IRegisterForm, IRegisterFormErrors } from "@/interfaces/types";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import styles from "../form.module.css";
 import Link from "next/link";
 
-const API_LOCAL = process.env.NEXT_PUBLIC_API_LOCAL;
+const API_LOCAL = NEXT_PUBLIC_API_URL;
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -21,6 +22,7 @@ const RegisterForm = () => {
     address: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const [errorData, setErrorData] = React.useState<IRegisterFormErrors>({});
@@ -29,7 +31,7 @@ const RegisterForm = () => {
     const { name, value } = event.target;
     setRegiterData({ ...regiterData, [name]: value });
 
-    setErrorData(validate({ ...regiterData, [name]: value }));
+    setErrorData(validateRegister({ ...regiterData, [name]: value }));
   };
 
   const PetitionRegister = async (): Promise<boolean> => {
@@ -38,35 +40,30 @@ const RegisterForm = () => {
         `${API_LOCAL}/users/register/`,
         regiterData
       );
-      console.log(response.data);
-      alert("Register Success");
-      return true;
+      return response.data;
     } catch (error) {
-      console.log(error, "error");
-      alert("Error Register: Please try again later.");
+      alert("Error Register: " + error);
       return false;
     }
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const errors = validate(regiterData);
-    setErrorData(errors);
 
-    if (Object.keys(errors).length === 0) {
+    if (Object.keys(errorData).length === 0) {
       const registerSuccess = await PetitionRegister();
       if (registerSuccess) {
+        alert("Register Success");
         router.push("/login");
       }
     } else {
       alert("Error Submit: Please fill out all fields correctly.");
-      console.log("Error Submit", errors);
     }
   };
 
   return (
     <Card
-      className={`${styles.colorForm} flex flex-col items-center justify-center poppins-regular relative z-10`}
+      className={`${styles.colorForm} flex flex-col items-center justify-center poppins-regular relative z-10 m-7`}
       shadow={false}
     >
       <div className="flex flex-col items-center poppins-regular">
@@ -76,9 +73,12 @@ const RegisterForm = () => {
         <Typography color="white" className="mt-1 font-normal poppins-regular">
           Nice to meet you! Enter your details to register.
         </Typography>
-        <Typography color="gray" className="mt-4 text-center font-normal">
+        <Typography color="gray" className="mt-4 text-center poppins-regular">
           Already have an account?{" "}
-          <Link href="/login" className="font-medium text-pink-500">
+          <Link
+            href="/login"
+            className="font-medium text-pink-500 poppins-semibold"
+          >
             Sign In
           </Link>
         </Typography>
@@ -88,7 +88,11 @@ const RegisterForm = () => {
         onSubmit={handleSubmit}
       >
         <div className="mb-1 flex flex-col gap-6">
-          <Typography variant="h6" color="pink" className="-mb-3">
+          <Typography
+            variant="h6"
+            color="pink"
+            className="-mb-3 poppins-semibold"
+          >
             Your Name
           </Typography>
           <Input
@@ -98,7 +102,7 @@ const RegisterForm = () => {
             onChange={handleChange}
             size="lg"
             placeholder="Name"
-            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900"
+            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900 poppins-regular"
             labelProps={{
               className: "before:content-none after:content-none",
             }}
@@ -109,7 +113,11 @@ const RegisterForm = () => {
               {errorData.name}
             </Typography>
           )}
-          <Typography variant="h6" color="pink" className="-mb-3">
+          <Typography
+            variant="h6"
+            color="pink"
+            className="-mb-3 poppins-semibold"
+          >
             Your Phone
           </Typography>
           <Input
@@ -119,18 +127,22 @@ const RegisterForm = () => {
             onChange={handleChange}
             size="lg"
             placeholder="Phone"
-            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900"
+            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900 poppins-regular"
             labelProps={{
               className: "before:content-none after:content-none",
             }}
             crossOrigin={undefined}
           />
           {errorData.phone && (
-            <Typography color="red" className=" text-sm">
+            <Typography color="red" className=" text-sm poppins-regular">
               {errorData.phone}
             </Typography>
           )}
-          <Typography variant="h6" color="pink" className="-mb-3">
+          <Typography
+            variant="h6"
+            color="pink"
+            className="-mb-3 poppins-semibold"
+          >
             Your Adress
           </Typography>
           <Input
@@ -140,18 +152,22 @@ const RegisterForm = () => {
             onChange={handleChange}
             size="lg"
             placeholder="Address"
-            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900"
+            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900 poppins-regular"
             labelProps={{
               className: "before:content-none after:content-none",
             }}
             crossOrigin={undefined}
           />
           {errorData.address && (
-            <Typography color="red" className=" text-sm">
+            <Typography color="red" className=" text-sm poppins-regular">
               {errorData.address}
             </Typography>
           )}
-          <Typography variant="h6" color="pink" className="-mb-3">
+          <Typography
+            variant="h6"
+            color="pink"
+            className="-mb-3 poppins-semibold"
+          >
             Your Email
           </Typography>
           <Input
@@ -161,18 +177,22 @@ const RegisterForm = () => {
             onChange={handleChange}
             size="lg"
             placeholder="name@mail.com"
-            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900"
+            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900 poppins-regular"
             labelProps={{
               className: "before:content-none after:content-none",
             }}
             crossOrigin={undefined}
           />
           {errorData.email && (
-            <Typography color="red" className=" text-sm">
+            <Typography color="red" className=" text-sm poppins-regular">
               {errorData.email}
             </Typography>
           )}
-          <Typography variant="h6" color="pink" className="-mb-3">
+          <Typography
+            variant="h6"
+            color="pink"
+            className="-mb-3 poppins-semibold"
+          >
             Password
           </Typography>
           <Input
@@ -182,15 +202,40 @@ const RegisterForm = () => {
             onChange={handleChange}
             size="lg"
             placeholder="********"
-            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900"
+            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900 poppins-regular"
             labelProps={{
               className: "before:content-none after:content-none",
             }}
             crossOrigin={undefined}
           />
           {errorData.password && (
-            <Typography color="red" className=" text-sm">
+            <Typography color="red" className=" text-sm poppins-regular">
               {errorData.password}
+            </Typography>
+          )}
+          <Typography
+            variant="h6"
+            color="pink"
+            className="-mb-3 poppins-semibold"
+          >
+            Confirm Password
+          </Typography>
+          <Input
+            type="password"
+            name="confirmPassword"
+            value={regiterData.confirmPassword}
+            onChange={handleChange}
+            size="lg"
+            placeholder="********"
+            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900 poppins-regular"
+            labelProps={{
+              className: "before:content-none after:content-none",
+            }}
+            crossOrigin={undefined}
+          />
+          {errorData.password && (
+            <Typography color="red" className=" text-sm poppins-regular">
+              {errorData.confirmPassword}
             </Typography>
           )}
         </div>

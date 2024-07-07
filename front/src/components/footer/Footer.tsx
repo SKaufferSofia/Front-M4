@@ -27,7 +27,7 @@ const Footer = () => {
         <div className="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
           <h2 className="text-2xl font-bold mb-4 text-pink-600">Quick Links</h2>
           <nav>
-            <ul className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-4 justify-center md:justify-start ">
+            <ul className="flex flex-col items-center space-y-2 md:space-y-0 md:flex-row md:space-x-4 justify-center md:justify-start ">
               <li>
                 <Link
                   href="/home"
@@ -70,12 +70,7 @@ const Footer = () => {
             height={100}
           />
         </div>
-        <div
-          className="w-full md:w-1/3"
-          style={{
-            paddingLeft: "50px",
-          }}
-        >
+        <div className="w-full md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
           <h2 className="text-2xl font-bold mb-4 text-pink-600">Follow Us</h2>
           <div className="flex space-x-4 justify-center md:justify-start">
             <a

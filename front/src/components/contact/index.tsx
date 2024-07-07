@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const ContactComponent = () => {
   return (
-    <section className="py-16">
+    <section className="py-[100px]">
       <div className="container mx-auto px-4">
         <Image
           src="/background-contact.avif"

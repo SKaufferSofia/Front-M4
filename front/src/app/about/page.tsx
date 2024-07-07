@@ -1,28 +1,15 @@
-import Footer from "@/components/footer/Footer";
-const links = [
-  { name: "Open roles", href: "#" },
-  { name: "Internship program", href: "#" },
-  { name: "Our values", href: "#" },
-  { name: "Meet our leadership", href: "#" },
-];
-const stats = [
-  { name: "Offices worldwide", value: "12" },
-  { name: "Full-time colleagues", value: "300+" },
-  { name: "Hours per week", value: "40" },
-  { name: "Paid time off", value: "Unlimited" },
-];
 import Image from "next/image";
 
 const About = () => {
   return (
     <div>
-      <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
+      <div className="relative -z-20 isolate overflow-hidden bg-gray-900 py-24 sm:py-[7rem]">
         <Image
           src="/background-about.avif"
           alt=""
           width={2000}
           height={1000}
-          className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center filter brightness-30"
+          className="img-background"
         />
 
         <div
@@ -61,30 +48,8 @@ const About = () => {
               journey to excellence.
             </p>
           </div>
-          <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
-              {links.map((link) => (
-                <a key={link.name} href={link.href}>
-                  {link.name} <span aria-hidden="true">&rarr;</span>
-                </a>
-              ))}
-            </div>
-            <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
-              {stats.map((stat) => (
-                <div key={stat.name} className="flex flex-col-reverse">
-                  <dt className="text-base leading-7 text-gray-300">
-                    {stat.name}
-                  </dt>
-                  <dd className="text-2xl font-bold leading-9 tracking-tight text-white">
-                    {stat.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

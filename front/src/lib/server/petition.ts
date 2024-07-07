@@ -1,15 +1,17 @@
 import axios from "axios";
-const API_LOCAL = process.env.NEXT_PUBLIC_API_LOCAL;
+import { NEXT_PUBLIC_API_URL } from "./envs";
 
-export const fetchProducts = async () => {
-  const response = await axios.get(`${API_LOCAL}/products`);
+const API_PUBLIC = NEXT_PUBLIC_API_URL;
+
+export const getProducts = async () => {
+  const response = await axios.get(`${API_PUBLIC}/products`);
   const data = response.data;
 
   return data;
 };
 
-export const ProductDetailFetch = async (id: number) => {
-  const response = await axios.get(`${API_LOCAL}/products/${id}`);
+export const getProductDetail = async (id: number) => {
+  const response = await axios.get(`${API_PUBLIC}/products/${id}`);
   const data = response.data;
   return data;
 };

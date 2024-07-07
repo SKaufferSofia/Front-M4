@@ -1,12 +1,11 @@
 import CardProducts from "@/components/products/CardProducts";
-import Footer from "@/components/footer/Footer";
 import { FaHome } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
-import { fetchProducts } from "@/lib/server/petition";
+import { getProducts } from "@/lib/server/petition";
 
 const Store = async () => {
-  const products = await fetchProducts();
+  const products = await getProducts();
 
   return (
     <div className="flex justify-center flex-col">
@@ -26,7 +25,6 @@ const Store = async () => {
           <FaHome size={28} className="hover:text-pink-400" />
         </Link>
       </div>
-      <Footer />
     </div>
   );
 };

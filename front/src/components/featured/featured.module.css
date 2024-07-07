@@ -1,17 +1,20 @@
 .featured {
-  width: 650px;
-  height: 400px;
+  width: 40.625rem;
+  height: 25rem;
   background-color: white;
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
   border-radius: 10px;
   margin: 25px;
 }
 
-.featuredImage {
-  width: auto;
-  height: 200px;
+@media screen and (max-width: 700px) {
+  .featured {
+    flex-direction: column;
+    margin: 10px;
+  }
 }
 
 .featured:hover {

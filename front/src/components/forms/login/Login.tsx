@@ -1,17 +1,16 @@
 "use client";
 
 import React from "react";
+import { NEXT_PUBLIC_API_URL } from "@/lib/server/envs";
 import styles from "../form.module.css";
 import { Card, Input, Typography } from "@material-tailwind/react";
-import { validate } from "./helpers/validate";
-import { json } from "stream/consumers";
-import useToken from "@/hook/useToken";
+import { validateLogin } from "@/helpers/validate";
 import axios from "axios";
 import useUserData from "@/hook/useUserData";
 import Link from "next/link";
 import { ILoginForm, ILoginFormErrors } from "@/interfaces/types";
 
-const API_PUBLIC = process.env.NEXT_PUBLIC_API_LOCAL;
+const API_PUBLIC = NEXT_PUBLIC_API_URL;
 
 const LoginForm = () => {
   const [loginData, setLoginData] = React.useState<ILoginForm>({
@@ -20,21 +19,17 @@ const LoginForm = () => {
   });
   const [errorData, setErrorData] = React.useState<ILoginFormErrors>({});
 
-  const { setToken } = useToken();
-  const { setUserData } = useUserData();
+  const { saveToken, saveUserData } = useUserData();
 
   const PetitionLogin = async () => {
     try {
       const response = await axios.post(`${API_PUBLIC}/users/login`, loginData);
-      setToken(response.data.token); //viene de respuesta del json como una
-      localStorage.setItem("userToken", response.data.token); //seteo el token del local storage como el nuevo token que viene del json
-
-      // Guarda los datos del usuario
-      setUserData(response.data.user);
+      saveToken(response.data.token);
+      saveUserData(response.data.user);
 
       return true;
     } catch (error) {
-      alert("Login Failed: Email or password incorrect");
+      alert("Login Failed: " + error);
       return false;
     }
   };
@@ -42,14 +37,12 @@ const LoginForm = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setLoginData({ ...loginData, [name]: value });
-    setErrorData(validate({ ...loginData, [name]: value }));
+    setErrorData(validateLogin({ ...loginData, [name]: value }));
   };
 
   const handleSumbit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const errors = validate(loginData);
-    setErrorData(errors);
     if (Object.keys(errorData).length === 0) {
       const loginSuccess = await PetitionLogin();
       if (loginSuccess) {
@@ -63,7 +56,7 @@ const LoginForm = () => {
 
   return (
     <Card
-      className={`${styles.colorForm} flex flex-col items-center justify-center poppins-regular relative z-10`}
+      className={`${styles.colorForm} flex flex-col items-center justify-center poppins-regular relative z-10 m-7`}
       shadow={false}
     >
       <div className="flex flex-col items-center poppins-regular">
@@ -79,7 +72,11 @@ const LoginForm = () => {
         onSubmit={handleSumbit}
       >
         <div className="mb-1 flex flex-col gap-6">
-          <Typography variant="h6" color="pink" className="-mb-3">
+          <Typography
+            variant="h6"
+            color="pink"
+            className="-mb-3 poppins-semibold"
+          >
             Email
           </Typography>
           <Input
@@ -89,18 +86,22 @@ const LoginForm = () => {
             onChange={handleChange}
             size="lg"
             placeholder="name@mail.com"
-            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900"
+            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900 poppins-regular"
             labelProps={{
               className: "before:content-none after:content-none",
             }}
             crossOrigin={undefined}
           />
           {errorData.email && (
-            <Typography color="red" className=" text-sm">
-              {errorData.password}
+            <Typography color="red" className="poppins-regular text-sm">
+              {errorData.email}
             </Typography>
           )}
-          <Typography variant="h6" color="pink" className="-mb-3">
+          <Typography
+            variant="h6"
+            color="pink"
+            className="-mb-3 poppins-semibold"
+          >
             Password
           </Typography>
           <Input
@@ -110,14 +111,14 @@ const LoginForm = () => {
             onChange={handleChange}
             size="lg"
             placeholder="********"
-            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900"
+            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900 poppins-regular"
             labelProps={{
               className: "before:content-none after:content-none",
             }}
             crossOrigin={undefined}
           />
           {errorData.password && (
-            <Typography color="red" className=" text-sm">
+            <Typography color="red" className=" text-sm poppins-regular">
               {errorData.password}
             </Typography>
           )}
