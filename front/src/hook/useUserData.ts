@@ -1,18 +1,20 @@
-import { useState, useEffect } from "react";
+import { IOrders, IUser } from "@/interfaces/types";
+import { getOrders } from "@/lib/server/petitionProducts";
+import React from "react";
 
 const useUserData = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [token, setToken] = useState<string>("");
-  const [userData, setUserData] = useState({
+  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
+  const [token, setToken] = React.useState<string>("");
+  const [userData, setUserData] = React.useState<IUser>({
     name: "",
     email: "",
     address: "",
     phone: "",
-    role: "",
-    orders: [Object],
+    orders: [],
   });
+  const [orders, setOrders] = React.useState<IOrders[]>([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (typeof window !== "undefined") {
       const storedToken = localStorage.getItem("userToken");
       if (storedToken) {
@@ -22,7 +24,7 @@ const useUserData = () => {
     }
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUserData = localStorage.getItem("userData");
       if (storedUserData) {
@@ -31,17 +33,22 @@ const useUserData = () => {
     }
   }, []);
 
+  React.useEffect(() => {
+    if (token) {
+      getOrders(token, setOrders);
+    }
+  }, [token]);
+
   const saveToken = (token: string) => {
     if (typeof window !== "undefined") {
       if (token) {
         localStorage.setItem("userToken", token);
-        setIsLoggedIn(true);
       }
     }
     setToken(token);
   };
 
-  const saveUserData = (data: typeof userData) => {
+  const saveUserData = (data: IUser) => {
     if (typeof window !== "undefined") {
       localStorage.setItem("userData", JSON.stringify(data));
     }
@@ -60,6 +67,8 @@ const useUserData = () => {
     isLoggedIn,
     setIsLoggedIn,
     token,
+    orders,
+    setOrders,
     setToken,
     userData,
     setUserData,

@@ -49,9 +49,10 @@ body {
 }
 
 .button {
-  @apply bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg;
+  @apply bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg disabled:bg-gray-900;
   width: 130px;
 }
+
 .button-black {
   width: 105px;
   height: 35px;
@@ -64,7 +65,7 @@ body {
 
 .img-background {
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
@@ -87,6 +88,7 @@ body {
   left: 0;
   z-index: -1;
 }
+
 .video-background {
   position: fixed;
   top: 0;
@@ -95,5 +97,23 @@ body {
   height: 100vh;
   object-fit: cover;
   z-index: -1;
-  filter: saturate(1) brightness(0.4);
+  filter: saturate(1) brightness(0.3);
+}
+
+.landingCard {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 50%;
+  max-width: 400px;
+  border-radius: 15px;
+  transition: width 0.3s ease;
+}
+
+.landingCard:hover {
+  width: 60%;
 }

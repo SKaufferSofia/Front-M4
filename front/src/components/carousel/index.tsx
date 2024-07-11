@@ -1,6 +1,6 @@
 "use client";
 
-import { Carousel, Typography } from "@material-tailwind/react";
+import { Carousel } from "@material-tailwind/react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -14,7 +14,7 @@ export function CarouselDefault() {
     >
       <div className="relative h-full w-full">
         <Image
-          src="/guitar-carousel.avif"
+          src="/carousel-1.avif"
           alt="image 1"
           className="h-full w-full object-cover"
           width={2000}
@@ -44,7 +44,7 @@ export function CarouselDefault() {
       </div>
       <div className="relative h-full w-full">
         <Image
-          src="/drum-carousel.avif"
+          src="/carousel-2.avif"
           alt="image 1"
           className="h-full w-full object-cover"
           width={2000}
@@ -72,7 +72,7 @@ export function CarouselDefault() {
       </div>
       <div className="relative h-full w-full">
         <Image
-          src="/piano-carousel.avif"
+          src="/carousel-3.avif"
           alt="image 1"
           className="h-full w-full object-cover"
           width={2000}

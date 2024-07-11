@@ -8,6 +8,7 @@ import { IProduct } from "@/interfaces/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa";
+import { alertAcept, alertTime } from "@/utils/utils";
 
 const ProductDetailCard = ({
   id,
@@ -21,23 +22,40 @@ const ProductDetailCard = ({
   const { token } = useUserData();
   const router = useRouter();
 
-  const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddToCart = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
 
     if (token) {
       const itemExists = cart.some((item) => item.id === id);
 
       if (itemExists) {
-        alert("Product already in cart");
-        router.push("/cart");
+        const alert = await alertAcept(
+          "error",
+          "Product already in cart",
+          "red"
+        );
+        if (alert.isConfirmed) {
+          router.push("/store");
+        }
       } else {
         addToCard({ id, name, price, image });
-        alert("Added to cart successfully");
-        router.push("/cart");
+        alertTime("success", "Product added to cart", "green");
+        setTimeout(() => {
+          router.push("/cart");
+        }, 1600);
       }
     } else {
-      alert("You must be logged in to add items to your cart");
-      router.push("/login");
+      const alert = await alertAcept(
+        "warning",
+        "You must be logged in to add products to your cart",
+        "orange"
+      );
+
+      if (alert.isConfirmed) {
+        router.push("/login");
+      }
     }
   };
 

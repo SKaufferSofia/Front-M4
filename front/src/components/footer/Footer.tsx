@@ -31,7 +31,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/home"
-                  className="hover:text-pink-600 hover:scale-105 hover:shadow-2xl hover:shadow-pink-700 hover:font-semibold"
+                  className=" hover:text-pink-500 hover:scale-105 hover:transition-all hover:font-semibold"
                 >
                   Home
                 </Link>
@@ -39,7 +39,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/store"
-                  className="hover:text-pink-600 hover:scale-105 hover:shadow-2xl hover:shadow-pink-700 hover:font-semibold"
+                  className=" hover:text-pink-500 hover:scale-105 hover:transition-all hover:font-semibold"
                 >
                   Store
                 </Link>
@@ -47,7 +47,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/about"
-                  className="hover:text-pink-600 hover:scale-105 hover:shadow-2xl hover:shadow-pink-700 hover:font-semibold"
+                  className=" hover:text-pink-500 hover:scale-105 hover:transition-all hover:font-semibold"
                 >
                   About
                 </Link>
@@ -55,7 +55,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/contact"
-                  className="hover:text-pink-600 hover:scale-105 hover:shadow-2xl hover:shadow-pink-700 hover:font-semibold"
+                  className=" hover:text-pink-500 hover:scale-105 hover:transition-all hover:font-semibold"
                 >
                   Contact
                 </Link>
@@ -65,7 +65,7 @@ const Footer = () => {
           <Image
             src="/logo.png"
             alt="logo"
-            className="h-20 flex justify-center mt-4"
+            className="flex justify-center mt-4 w-auto h-auto"
             width={100}
             height={100}
           />
@@ -75,25 +75,25 @@ const Footer = () => {
           <div className="flex space-x-4 justify-center md:justify-start">
             <a
               href="#"
-              className="text-gray-400 hover:text-pink-600 hover:scale-105 hover:shadow-2xl hover:shadow-pink-700"
+              className="text-gray-400 hover:text-pink-500 hover:scale-105 hover:transition-all hover:shadow-2xl hover:shadow-pink-300"
             >
               <FaFacebook size={24} />
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-pink-600 hover:scale-105 hover:shadow-2xl hover:shadow-pink-700"
+              className="text-gray-400 hover:text-pink-500 hover:scale-105 hover:transition-all hover:shadow-2xl hover:shadow-pink-300"
             >
               <FaTwitter size={24} />
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-pink-600 hover:scale-105 hover:shadow-2xl hover:shadow-pink-700"
+              className="text-gray-400 hover:text-pink-500 hover:scale-105 hover:transition-all hover:shadow-2xl hover:shadow-pink-300"
             >
               <FaInstagram size={24} />
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-pink-600 hover:scale-105 hover:shadow-2xl hover:shadow-pink-700"
+              className="text-gray-400  hover:text-pink-500 hover:scale-105 hover:transition-all hover:shadow-2xl hover:shadow-pink-300"
             >
               <FaLinkedin size={24} />
             </a>

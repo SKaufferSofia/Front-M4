@@ -20,5 +20,6 @@
 .featured:hover {
   transform: scale(1.01);
   box-shadow: 0 0 50px rgb(255, 0, 106);
+  transition: 0.15s ease-in-out;
   animation: neon 5s infinite;
 }

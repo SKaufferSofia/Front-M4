@@ -1,7 +1,7 @@
 import { CarouselDefault } from "@/components/carousel";
 import FeaturedComponent from "@/components/featured/Featured";
 import { ProductFeatured } from "@/components/featured/FeaturedProducts";
-import { getProducts } from "@/lib/server/petition";
+import { getProducts } from "@/lib/server/petitionProducts";
 import Image from "next/image";
 
 const Home = async () => {

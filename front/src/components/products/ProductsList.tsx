@@ -18,7 +18,7 @@ export const ProductsList: React.FC<IProduct> = ({
   description,
 }) => {
   return (
-    <Card className="mt-6 w-80 bg-black/80 hover:scale-[102%] hover:shadow-2xl hover:shadow-pink-700 flex justify-between">
+    <Card className="mt-6 w-80 bg-black/80 hover:scale-[102%] hover:shadow-2xl hover:shadow-pink-700 hover:transition-all flex justify-between">
       <Typography variant="h5" color="white" className="m-5 poppins-medium">
         {name}
       </Typography>

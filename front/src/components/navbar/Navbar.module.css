@@ -5,6 +5,7 @@
 .navbarLi:hover {
   color: rgb(255, 0, 106);
   text-shadow: 0 0 17px rgb(255, 0, 106);
+  transition: 0.1s ease-in-out;
   animation: neon 5s infinite;
   font-weight: 800;
 }

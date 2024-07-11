@@ -1,13 +1,24 @@
 import { CheckoutCardProps } from "@/interfaces/types";
+import { alertQuestion, alertTime } from "@/utils/utils";
 import { FaTrash } from "react-icons/fa";
 
 const CheckoutCard = ({ product, removeById }: CheckoutCardProps) => {
   const { id, name, image, price } = product;
 
-  const handleRemoveItem = () => {
+  const handleRemoveItem = async () => {
     if (id !== undefined) {
-      removeById(id);
-      alert("Item removed from cart");
+      const alert = await alertQuestion(
+        "question",
+        "Are you sure?",
+        "Are you sure you want to remove this product?",
+        "orange",
+        "Yes, delete it!"
+      );
+
+      if (alert.isConfirmed) {
+        removeById(id);
+        alertTime("success", "Product removed", "green");
+      }
     }
   };
 

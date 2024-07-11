@@ -1,11 +1,10 @@
-import { IOrders, IProduct } from "@/interfaces/types";
-import { useState, useEffect } from "react";
+import { IProduct } from "@/interfaces/types";
+import React from "react";
 
 const useCart = () => {
-  const [cart, setCart] = useState<IProduct[]>([]);
-  const [orders, setOrders] = useState<IOrders[]>([]);
+  const [cart, setCart] = React.useState<IProduct[]>([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (typeof window !== "undefined") {
       const storedCart = localStorage.getItem("cart");
       if (storedCart) {
@@ -38,7 +37,7 @@ const useCart = () => {
     });
   };
 
-  return { cart, setCart, orders, setOrders, addToCard, clearCart, removeById };
+  return { cart, setCart, addToCard, clearCart, removeById };
 };
 
 export default useCart;

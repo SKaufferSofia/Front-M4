@@ -3,13 +3,7 @@
 import React, { useState } from "react";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
-import {
-  FaShoppingBag,
-  FaUser,
-  FaUserPlus,
-  FaBars,
-  FaTimes,
-} from "react-icons/fa";
+import { FaShoppingBag, FaUser, FaBars, FaTimes } from "react-icons/fa";
 import useUserData from "@/hook/useUserData";
 import Image from "next/image";
 import ProfileMenu from "./ProfileMenu";
@@ -67,7 +61,15 @@ const NavbarComponent: React.FC = () => {
         </ul>
       </div>
       <div className="flex gap-4">
-        {isLoggedIn ? (
+        {!isLoggedIn ? (
+          <div className="flex gap-4 items-center">
+            <Link href="/login">
+              <button className={styles.navbarLi}>
+                <FaUser size={20} />
+              </button>
+            </Link>
+          </div>
+        ) : (
           <div className="flex gap-4">
             <Link href="/cart" onClick={handleOnChange}>
               <button className={styles.navbarLi}>
@@ -75,25 +77,6 @@ const NavbarComponent: React.FC = () => {
               </button>
             </Link>
             <ProfileMenu />
-          </div>
-        ) : (
-          <div className="flex gap-4 items-center">
-            <Link href="/cart">
-              <button className={styles.navbarLi}>
-                <FaShoppingBag size={20} />
-              </button>
-            </Link>
-            <Link href="/login">
-              <button className={styles.navbarLi}>
-                <FaUser size={20} />
-              </button>
-            </Link>
-
-            <Link href="/login/register">
-              <button className={styles.navbarLi}>
-                <FaUserPlus size={24} />
-              </button>
-            </Link>
           </div>
         )}
       </div>

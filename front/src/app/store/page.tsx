@@ -2,7 +2,7 @@ import CardProducts from "@/components/products/CardProducts";
 import { FaHome } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
-import { getProducts } from "@/lib/server/petition";
+import { getProducts } from "@/lib/server/petitionProducts";
 
 const Store = async () => {
   const products = await getProducts();
@@ -22,7 +22,7 @@ const Store = async () => {
           href="/home"
           className="flex justify-center rounded-2xl p-2 hover:scale-105 hover:shadow-pink-700 hover:font-semixl hover:bg-black/40"
         >
-          <FaHome size={28} className="hover:text-pink-400" />
+          <FaHome size={28} className=" hover:transition-all" />
         </Link>
       </div>
     </div>

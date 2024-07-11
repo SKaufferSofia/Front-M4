@@ -41,7 +41,7 @@ export const CardProductFeatured: React.FC<IProduct> = ({
   image,
 }) => {
   return (
-    <Card className="mt-6 w-72 bg-white/10 flex flex-col justify-between">
+    <Card className="mt-6 flex flex-col justify-between bg-gray-700/30">
       <CardHeader color="blue-gray" className="relative h-56 mt-3">
         <Image
           src={image}

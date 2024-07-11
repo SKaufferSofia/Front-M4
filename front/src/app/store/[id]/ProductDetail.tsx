@@ -1,5 +1,5 @@
 import ProductDetailCard from "@/components/products/ProductDetailCard";
-import { getProductDetail } from "@/lib/server/petition";
+import { getProductDetail } from "@/lib/server/petitionProducts";
 
 export const ProductDetail = async ({ params }: { params: { id: string } }) => {
   const { id, name, description, price, stock, image } = await getProductDetail(

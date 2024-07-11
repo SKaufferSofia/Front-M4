@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
-import { Typography, Button } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import Link from "next/link";
-import { FaHome } from "react-icons/fa";
 
 const NotFoundPage = () => {
   return (

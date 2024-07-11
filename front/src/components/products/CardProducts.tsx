@@ -1,7 +1,7 @@
 "use client";
 
 import { IProduct } from "@/interfaces/types";
-import { ProductsList } from "./utils";
+import { ProductsList } from "./ProductsList";
 
 const CardProducts = ({ products }: { products: IProduct[] }) => {
   return (

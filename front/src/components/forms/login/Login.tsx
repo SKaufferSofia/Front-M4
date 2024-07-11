@@ -1,56 +1,62 @@
 "use client";
-
 import React from "react";
-import { NEXT_PUBLIC_API_URL } from "@/lib/server/envs";
 import styles from "../form.module.css";
 import { Card, Input, Typography } from "@material-tailwind/react";
 import { validateLogin } from "@/helpers/validate";
-import axios from "axios";
 import useUserData from "@/hook/useUserData";
 import Link from "next/link";
-import { ILoginForm, ILoginFormErrors } from "@/interfaces/types";
-
-const API_PUBLIC = NEXT_PUBLIC_API_URL;
+import useForm from "@/hook/useForm";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { alertForm } from "@/utils/utils";
+import { PetitionLogin } from "@/lib/server/petitionUser";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
-  const [loginData, setLoginData] = React.useState<ILoginForm>({
-    email: "",
-    password: "",
-  });
-  const [errorData, setErrorData] = React.useState<ILoginFormErrors>({});
+  const { isLoggedIn, saveToken, saveUserData } = useUserData();
+  const {
+    loginData,
+    setLoginData,
+    errorLogin,
+    setErrorLogin,
+    showPassword,
+    setShowPassword,
+  } = useForm();
 
-  const { saveToken, saveUserData } = useUserData();
+  if (isLoggedIn) {
+    const router = useRouter();
+    router.push("/home");
+  }
 
-  const PetitionLogin = async () => {
-    try {
-      const response = await axios.post(`${API_PUBLIC}/users/login`, loginData);
-      saveToken(response.data.token);
-      saveUserData(response.data.user);
-
-      return true;
-    } catch (error) {
-      alert("Login Failed: " + error);
-      return false;
-    }
-  };
+  const handleOnclickPassword = () => setShowPassword(!showPassword);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setLoginData({ ...loginData, [name]: value });
-    setErrorData(validateLogin({ ...loginData, [name]: value }));
+    setErrorLogin(validateLogin({ ...loginData, [name]: value }));
   };
 
   const handleSumbit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (Object.keys(errorData).length === 0) {
-      const loginSuccess = await PetitionLogin();
+    if (Object.keys(errorLogin).length === 0) {
+      const loginSuccess = await PetitionLogin(
+        loginData,
+        saveToken,
+        saveUserData
+      );
       if (loginSuccess) {
-        alert("Login Success");
-        window.location.href = "/store";
+        alertForm("success", "Login Success", "Redirecting...", "green");
+        setTimeout(() => {
+          window.location.href = "/store";
+        }, 2000);
       }
     } else {
-      alert("Login Failed: Please complete all fields correctly");
+      alertForm(
+        "warning",
+        "Login...",
+        "Please complete all fields correctly",
+        "orange"
+      );
     }
   };
 
@@ -71,14 +77,16 @@ const LoginForm = () => {
         className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
         onSubmit={handleSumbit}
       >
-        <div className="mb-1 flex flex-col gap-6">
+        <div className="mb-1 flex flex-col gap-3">
           <Typography
             variant="h6"
             color="pink"
-            className="-mb-3 poppins-semibold"
+            className="-mb-3 poppins-semibold flex flex-row items-center gap-1"
           >
             Email
+            {!loginData.email && <p className="text-red-500 font-bold ">*</p>}
           </Typography>
+
           <Input
             type="email"
             name="email"
@@ -87,52 +95,82 @@ const LoginForm = () => {
             size="lg"
             placeholder="name@mail.com"
             className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900 poppins-regular"
-            labelProps={{
-              className: "before:content-none after:content-none",
-            }}
             crossOrigin={undefined}
           />
-          {errorData.email && (
-            <Typography color="red" className="poppins-regular text-sm">
-              {errorData.email}
-            </Typography>
-          )}
+          <div className="-mt-2">
+            {errorLogin.email && (
+              <Typography color="red" className="poppins-regular text-sm">
+                {errorLogin.email}
+              </Typography>
+            )}
+          </div>
+
           <Typography
             variant="h6"
             color="pink"
-            className="-mb-3 poppins-semibold"
+            className="-mb-3 poppins-semibold flex flex-row items-center gap-1"
           >
             Password
+            {!loginData.password && (
+              <p className="text-red-500 font-bold ">*</p>
+            )}
           </Typography>
-          <Input
-            type="password"
-            name="password"
-            value={loginData.password}
-            onChange={handleChange}
-            size="lg"
-            placeholder="********"
-            className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900 poppins-regular"
-            labelProps={{
-              className: "before:content-none after:content-none",
-            }}
-            crossOrigin={undefined}
-          />
-          {errorData.password && (
-            <Typography color="red" className=" text-sm poppins-regular">
-              {errorData.password}
-            </Typography>
-          )}
+          <div className="relative">
+            <Input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={loginData.password}
+              onChange={handleChange}
+              size="lg"
+              placeholder="********"
+              className="text-white !border-t-blue-gray-200 focus:!border-t-gray-900 poppins-regular"
+              crossOrigin={undefined}
+            />
+            <button type="button" onClick={handleOnclickPassword}>
+              {showPassword ? (
+                <FaEye
+                  size={17}
+                  className="absolute right-3 top-6 -translate-y-1/2 text-white"
+                />
+              ) : (
+                <FaEyeSlash
+                  size={17}
+                  className="absolute right-3 top-6 -translate-y-1/2 text-white"
+                />
+              )}
+            </button>
+            <div className="mt-1">
+              {!loginData.password && (
+                <p className=" text-sm text-red-500 font-medium ">
+                  {" "}
+                  (*) All fields are required
+                </p>
+              )}
+            </div>
+          </div>
         </div>
         <div className="flex flex-col items-center gap-1 mt-6">
-          <button type="submit" className="button">
+          <button
+            type="submit"
+            className="button"
+            disabled={
+              (!loginData.email && !loginData.password) ||
+              !loginData.email ||
+              !loginData.password
+            }
+          >
             Login
           </button>
+
           <Typography
             color="white"
             className="mt-4 text-center font-normal poppins-light"
           >
             You don´t have an account?{" "}
-            <Link href="/login/register" className="font-medium text-pink-500">
+            <Link
+              href="/login/register"
+              className="font-medium text-pink-500 hover:text-pink-500 hover:scale-105 hover:transition-all hover:font-bold hover:shadow-pink-400"
+            >
               Sign up
             </Link>
           </Typography>

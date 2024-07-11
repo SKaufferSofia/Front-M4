@@ -1,6 +1,7 @@
 "use client";
 import useCart from "@/hook/useCart";
 import useUserData from "@/hook/useUserData";
+import { alertQuestion } from "@/utils/utils";
 import {
   Button,
   Menu,
@@ -14,10 +15,19 @@ export default function ProfileMenu() {
   const { logout } = useUserData();
   const { clearCart } = useCart();
 
-  const handleLogout = () => {
-    logout();
-    clearCart();
-    window.location.href = "/";
+  const handleLogout = async () => {
+    const alert = await alertQuestion(
+      "question",
+      "Log Out",
+      "Are you sure you want to log out?",
+      "orange",
+      "Yes, log out!"
+    );
+    if (alert.isConfirmed) {
+      logout();
+      clearCart();
+      window.location.href = "/";
+    }
   };
 
   return (
