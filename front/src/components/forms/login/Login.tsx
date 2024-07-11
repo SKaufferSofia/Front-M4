@@ -4,15 +4,21 @@ import styles from "../form.module.css";
 import { Card, Input, Typography } from "@material-tailwind/react";
 import { validateLogin } from "@/helpers/validate";
 import useUserData from "@/hook/useUserData";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import useForm from "@/hook/useForm";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { alertForm } from "@/utils/utils";
 import { PetitionLogin } from "@/lib/server/petitionUser";
-import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const router = useRouter();
   const { isLoggedIn, saveToken, saveUserData } = useUserData();
+
+  if (isLoggedIn) {
+    router.push("/home");
+  }
+
   const {
     loginData,
     setLoginData,
@@ -21,11 +27,6 @@ const LoginForm = () => {
     showPassword,
     setShowPassword,
   } = useForm();
-
-  if (isLoggedIn) {
-    const router = useRouter();
-    router.push("/home");
-  }
 
   const handleOnclickPassword = () => setShowPassword(!showPassword);
 
